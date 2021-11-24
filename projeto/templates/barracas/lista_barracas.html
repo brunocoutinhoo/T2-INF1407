@@ -1,0 +1,90 @@
+{% extends "base_generic.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+{% include "messages.html" %}
+<div class="content-section">
+  <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <br/>
+        <br/>
+<!-- Barracas -->
+        <div class="row align-items-center">
+            <div class="col-md-5">
+                <h1> Barracas: </h1>
+            </div>
+        </div>
+    
+        <hr class="intro-divider">
+        <br/>
+            {% if barracas %}
+        <table class="table table-striped table-bordered" id="tabela_barracas">
+            <thead>
+                <tr>
+                    <th width="50%"> Nome </th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for barraca in barracas %}
+            <tr>
+                <td>
+                    <a href="#" data-tt="tooltip" title="Ver mais informações da barraca.">
+                    {{ barraca.nome }} 
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+            {% else %}
+        <div style="text-align: center">
+            <div style="text-align: center">
+                <h3> Ainda não há nenhuma barraca cadastrada. </h3>
+            {% endif %}
+            </div>
+        </div> 
+      </div>
+      <br>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+$(document).ready(function() {
+  $.fn.dataTable.moment('DD/MM/YYYY');
+    $('#tabela_barracas').DataTable({
+
+    // configurações das mensagens da tabela
+    "language": { 
+      "lengthMenu": "Mostrar _MENU_ barracas por página",
+      "zeroRecords": "Nada com esse filtro - desculpe",
+      "info": "Mostrando _PAGE_ de _PAGES_",
+      "infoEmpty": "Não há barracas com esse filtro",
+      "infoFiltered": "(filtrado de um total de _MAX_ barracas)",
+      "paginate": {
+        "first": "Primeiro",
+        "last": "Último",
+        "next": "Próximo",
+        "previous": "Anterior",
+      },
+      "loadingRecords": "Carregando...",
+      "search": "Filtrar:",
+      "aria": {
+        "sortAscending": ": Ative para ordenar a coluna de forma ascendente",
+        "sortDescending": ": Ative para odenar a coluna de forma descendente"
+      }
+    },
+
+    // ordenação padrão: role
+    "order": [[ 1, "asc" ]],
+
+    "responsive": true
+  });
+});
+
+$('[data-tt="tooltip"]').tooltip();
+
+</script>
+{% endblock %}

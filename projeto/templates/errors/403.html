@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Forbidden{% endblock %}
+{% block body %}
+<div class="content-section">
+  <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <div style="text-align: center">
+          <br/>
+          <div class="alert alert-danger" role="alert">
+            Alerta!
+          </div>
+          <br/>
+          <div class="container">
+            <div class="card">
+              <div class="card-header">
+                <h1>Erro 403</h1>
+              </div>
+              <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                  <p>Você não possui permissões suficientes para acessar essa página.</p>
+                </blockquote>
+              </div>
+            </div>
+          </div>
+          <br/>
+          <a href="{{ url_for('home.homepage') }}" class="btn btn-outline-success my-2 my-sm-0">
+              <i class="fa fa-home"></i>
+              Home
+          </a>
+          <br/>
+          <br/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

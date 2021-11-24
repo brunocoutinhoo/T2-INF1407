@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="content-section">
+    <br/>
+    {% if not feiras %}
+        <div style="text-align:center">
+            <h3> Ainda não há feira. </h3>
+        </div>
+    {% else %}
+        {% for feira in feiras %}
+            <div class="row justify-content-center">
+                <div class="col-sm-8">
+                    <div class="card">
+                        <div class="card-body">
+                                <div class="col-sm-12">
+                                    <h5 class="card-title">{{ feira.nome }}</h5>
+                                </div>
+                                    <div class="container" style="margin:0">
+                                        <span>{{ "Quantidade de Barracas: " + }}</span>
+                                        <div class="resumo-feiras col-sm-1" style="display:inline-block; padding:0; margin-left: 1%; margin-right: 1%";></div>
+                                        <span> {{ feira.local }} </span>
+                                    </div>
+
+                                <p class="card-text">
+                                    <div class="col-sm-12" style="word-wrap:normal; max-width:100%; overflow:auto; text-align: justify;">
+                                        {{ feira.descricao }}
+                                    </div></p>
+                                </br>
+                                </br>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{ url_for('post.ler_post', pk_id=post['id']) }}" class="button-more-config button1">Ler mais</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+    <br>
+	<div class="row justify-content-center">
+		<div class="col-sm-8 text-center">
+	{% for num_page in num_pages %}
+		{% if num_page %}
+		<a href="{{ url_for('post.resumo', categoria=categoria, page=num_page) if num_page != page else '#' }}" class=" {{ 'btn btn-outline-dark' if num_page != page else 'btn btn-dark' }}"> {{ num_page }} </a>		
+		{% else %}...{% endif %}
+	{% endfor %}
+		</div>
+	</div>
+	<br>
+</div>
+{% endblock %}
