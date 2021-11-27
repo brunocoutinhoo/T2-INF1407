@@ -25,8 +25,6 @@ ENVIRONMENT = os.getenv('DJANGO_ENVIRONMENT', 'development')
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-^@)5q#3q%ec(#me-y$#_h-c7wt+8_25ao(g#l4*lhbkct3gs(b')
 if ENVIRONMENT == 'production':
     SECRET_KEY = os.environ['SECRET_KEY']  # exception se chave secreta não estiver configurada em produção
-if ENVIRONMENT != 'development':
-    pass
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
