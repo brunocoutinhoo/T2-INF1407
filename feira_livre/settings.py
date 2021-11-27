@@ -16,6 +16,7 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+ENVIRONMENT = os.getenv('DJANGO_ENVIRONMENT', 'development')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -24,6 +25,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-^@)5q#3q%ec(#me-y$#_h-c7wt+8_25ao(g#l4*lhbkct3gs(b')
 if ENVIRONMENT == 'production':
     SECRET_KEY = os.environ['SECRET_KEY']  # exception se chave secreta não estiver configurada em produção
+if ENVIRONMENT != 'development':
+    pass
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
