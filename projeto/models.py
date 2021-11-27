@@ -37,11 +37,17 @@ class Barraca(models.Model):
 
 class Produto(models.Model):
     produto_id = models.AutoField(primary_key=True)
-    barraca = models.ForeignKey('Barraca',on_delete=models.CASCADE, db_column='fk_barraca_id', related_name='produto_barraca_fk')
     nome = models.CharField(max_length=50)
-    valor = models.IntegerField()
-    unidade = models.CharField(max_length=10)
     descricao = models.CharField(max_length=100, blank=True, null=True)
+
+
+class ProdutoBarraca(models.Model):
+    produtobarraca_id = models.AutoField(primary_key=True)
+    produto = models.ForeignKey(Produto, on_delete=models.CASCADE, db_column='fk_produto_id', related_name='produtobarraca_produto_fk')
+    barraca = models.ForeignKey(Barraca,on_delete=models.CASCADE, db_column='fk_barraca_id', related_name='produtobarraca_barraca_fk')
+    preco_unitario = models.DecimalField(max_digits=6, decimal_places=2)
+    unidade = models.CharField(max_length=10)
+    quantidade = models.IntegerField()
 
 
 class ListaCompras(models.Model):
