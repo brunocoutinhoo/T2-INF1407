@@ -84,7 +84,7 @@
                 href="{% url 'lista_feiras' %}">Minha Lista</a>
                 {% endwith %}
                 {% if perms.projeto.change_barraca %}
-                  <a class="nav-link" href="{% url 'lista_feiras' %}">Minha Barraca</a>
+                  <a class="nav-link" href="{% url 'minhas_barracas' user.id %}">Minhas Barracas</a>
                 {% endif %}
             {% endif %}
             <hr />

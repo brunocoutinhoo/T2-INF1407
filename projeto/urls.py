@@ -1,6 +1,6 @@
 from django.urls import path
 from projeto.views.views_feira import lista_feiras, criar_feira, editar_feira, deletar_feira
-from projeto.views.views_barraca import lista_barracas, criar_barraca, editar_barraca, deletar_barraca, visualizar_barraca
+from projeto.views.views_barraca import lista_barracas, criar_barraca, editar_barraca, deletar_barraca, visualizar_barraca, minhas_barracas
 from projeto.views.views_auth import cadastro_usuario
 from projeto.views.views_home import index
 
@@ -16,4 +16,5 @@ urlpatterns = [
     path('barraca/editar/<int:barraca_id>', editar_barraca, name='editar_barraca'),
     path('barraca/deletar/<int:barraca_id>', deletar_barraca, name='deletar_barraca'),
     path('barraca/visualizar/<int:barraca_id>', visualizar_barraca, name='visualizar_barraca'),
+    path('minhasbarracas/<int:responsavel_id>', minhas_barracas, name='minhas_barracas'),
 ]
