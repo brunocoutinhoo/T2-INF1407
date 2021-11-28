@@ -1,10 +1,12 @@
 from django.contrib.auth import views
 from django.urls import reverse
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
 from django.utils.translation import gettext_lazy
 from django.contrib import messages
 from django.contrib.auth.models import Group
+from django.contrib.auth import logout
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect, reverse
 
 from projeto.forms.forms_auth import CadastrarUsuarioForm
 
@@ -40,10 +42,11 @@ def cadastro_usuario(request):
                     grupo_feirante.user_set.add(user)
                 if form.cleaned_data['tipo_usuario'] == 'Cliente':
                     grupo_cliente.user_set.add(user)
-
+                messages.add_message(request, messages.SUCCESS, gettext_lazy("Usuário criado com sucesso!"))
+                return redirect(reverse('user_created'))
             except Exception as e:
                 print(e)
-                messages.add_message(request, messages.ERROR, gettext_lazy("Não foi possível criar o usuário"))
+                # messages.add_message(request, messages.ERROR, gettext_lazy("Não foi possível criar o usuário"))
                 pass
     else:
         form = CadastrarUsuarioForm()
@@ -52,4 +55,11 @@ def cadastro_usuario(request):
         'form': form
     }
 
-    return render(request, 'auth/cadastro.html', context)
+    return render(request, 'registration/cadastro.html', context)
+
+
+def redirect_login(request):
+    return render(request, 'index.html')
+
+def userCreatedView(request):
+    return render(request, 'registration/user_created.html')

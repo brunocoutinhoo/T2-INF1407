@@ -9,10 +9,12 @@ from projeto.forms.forms_barraca import BarracaForm
 def lista_barracas(request, feira_id):
 
     barracas = Barraca.objects.filter(feira = feira_id).all()
+    feira_atual = Feira.objects.filter(feira_id = feira_id).first()
 
     context = {
         'barracas': barracas,
-        'feira_id': feira_id
+        'feira_id': feira_id,
+        'feira_atual': feira_atual
     }
 
     return render(request, "barracas/lista_barracas.html", context)
@@ -39,7 +41,7 @@ def criar_barraca(request, feira_id):
         try:
             barraca.save()
             messages.add_message(request, messages.INFO, _('Barraca criada com sucesso!\n'))
-            return redirect(reverse('lista_barracas'))
+            return redirect(reverse('lista_barracas', args=[feira_id]))
         except Exception as e:
             print(e)
             messages.add_message(request, messages.ERROR, _("Não foi possível criar a barraca"))
@@ -88,3 +90,15 @@ def deletar_barraca(request, barraca_id):
     messages.add_message(request, messages.INFO, _('Barraca deletada com sucesso!\n'))
 
     return redirect(reverse('lista_barracas'))
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def visualizar_barraca(request, barraca_id):
+
+    barraca = get_object_or_404(Barraca, barraca_id=barraca_id)
+
+    context = {
+        'barraca': barraca,
+    }
+
+    return render(request, "barracas/visualizar_barraca.html", context)

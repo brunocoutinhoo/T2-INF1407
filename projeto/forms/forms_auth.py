@@ -79,6 +79,8 @@ class CadastrarUsuarioForm(forms.Form):
             raise ValidationError(_('Erro de inserção de CPF, insira apenas números'))
         elif not(valida_cpf(cpf)):
             raise ValidationError('CPF inválido')
+        elif Usuario.objects.filter(cpf=cpf).count() > 0:
+            raise ValidationError(_('Este CPF já está associado a um usuário.'))
         else:
             return cpf
 
@@ -109,3 +111,9 @@ class CadastrarUsuarioForm(forms.Form):
 
         if pass1 is not None and pass1 != pass2:
             self.add_error('confirmar_senha', 'As senhas não correspondem.')
+
+class CustomPasswordResetForm(PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super(CustomPasswordResetForm, self).__init__(*args, **kwargs)
+
+    email = forms.CharField(label='E-mail', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '', 'id': 'id_email'}))

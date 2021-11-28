@@ -71,6 +71,6 @@ def deletar_feira(request, feira_id):
 
     feira = get_object_or_404(Feira, feira_id=feira_id)
     feira.delete()
-    messages.add_message(request, messages.INFO, _('Feira deletado com sucesso!\n'))
+    messages.add_message(request, messages.INFO, _('Feira deletada com sucesso!\n'))
 
     return redirect(reverse('lista_feiras'))

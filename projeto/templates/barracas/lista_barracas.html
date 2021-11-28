@@ -11,7 +11,7 @@
 <!-- Barracas -->
         <div class="row align-items-center">
             <div class="col-md-5">
-                <h1> Barracas: </h1>
+                <h1> Barracas da Feira {{ feira_atual.nome_feira }}: </h1>
             </div>
         </div>
     
@@ -28,28 +28,28 @@
         <table class="table table-striped table-bordered" id="tabela_barracas">
             <thead>
                 <tr>
-                    <th width="50%"> Nome </th>
-                </tr>
-                <tr>
-                  <th width="25%"> Responsável </th>
-                </tr>
-                <tr>
-                  <th width="25%"> Telefone </th>
+                  <th width="33%"> Nome </th>
+                  <th width="33%"> Responsável </th>
+                  <th width="33%"> Telefone </th>
                 </tr>
             </thead>
             <tbody>
             {% for barraca in barracas %}
             <tr>
                 <td>
-                    <a href="#" data-tt="tooltip" title="Ver mais informações da barraca.">
-                    {{ barraca.nome }} 
+                    <a href="{% url 'visualizar_barraca' barraca.barraca_id %}" data-tt="tooltip" title="Ver mais informações da barraca.">
+                    {{ barraca.nome_barraca }} 
                     </a>
                 </td>
                 <td>
-                    {{ barraca.nome_responsavel }} 
+                  {% if barraca.responsavel.first_name %}
+                    {{ barraca.responsavel.first_name }} {{ barraca.responsavel.last_name }}
+                  {% else %}
+                    Não Possui
+                  {% endif %}
                 </td>
                 <td>
-                    {{ barraca.telefone_responsavel }} 
+                    {{ barraca.telefone_responsavel }}
                 </td>
             </tr>
             {% endfor %}

@@ -9,22 +9,24 @@
   	<div class="row">
       <div class="col-md-12">
           <h3 class="sub"> Detalhes </h3>
-          <p> <b>Nome da Barraca:</b> {% if barraca.nome %} {{ barraca.nome }} {% else %} Sem informações {% endif %}</p>
+          <p> <b>Nome da Barraca:</b> {% if barraca.nome_barraca %} {{ barraca.nome_barraca }} {% else %} Sem informações {% endif %}</p>
       </div>
       <div class="col-md-12">
-        <h3 class="sub"> Detalhes </h3>
-        <p> <b>Responsável pela Barraca:</b> {% if barraca.nome_responsavel %} {{ barraca.nome_responsavel }} {% else %} Sem informações {% endif %}</p>
+        <p> <b>Responsável pela Barraca:</b> {% if barraca.responsavel.first_name %} {{ barraca.responsavel.first_name }} {{ barraca.responsavel.last_name }} {% else %} Sem informações {% endif %}</p>
       </div>
       <div class="col-md-12">
-          <p> <b>Telefone de Contato:</b> {% if barraca.telefone %} {{ barraca.telefone }} {% else %} Sem informações {% endif %}</p>
+        <h3 class="sub"> Descricao </h3>
+        <p> <b>Descrição:</b> {% if barraca.descricao %} {{ barraca.descricao }} {% else %} Sem informações {% endif %}</p>
       </div>
       <div class="col-md-12">
-          <h3 class="sub"> Endereço </h3>
-          <p> <b>Rua: </b> {% if barraca.endereco %} {{ barraca.endereco }} {% else %} Sem informações {% endif %}</p>
+          <p> <b>Telefone de Contato:</b> {% if barraca.telefone_responsavel %} {{ barraca.telefone_responsavel }} {% else %} Sem informações {% endif %}</p>
+      </div>
+      <div class="col-md-12">
+          <p> <b>Número da Barraca: </b> {% if barraca.numero %} {{ barraca.numero}} {% else %} Sem informações {% endif %}</p>
       </div>
     </div>
     <div>
-      <a href="{%url 'lista_barracas'%}"><button type="button" class="btn btn-primary btn-lg">Voltar</button></a>
+      <a href="{%url 'lista_barracas' barraca.feira.feira_id %}"><button type="button" class="btn btn-primary btn-lg">Voltar</button></a>
     </div>
   </div>
 </div>
