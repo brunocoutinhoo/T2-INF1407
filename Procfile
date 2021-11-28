@@ -1,0 +1,1 @@
+web: gunicorn feira_livre.wsgi --log-file -
