@@ -48,3 +48,22 @@
   @media screen and (min-width: 800px) { 
     #feira-logo { display: block; } 
   }
+
+
+.nav-link {
+  color: #000000;
+}
+
+.nav>a:active,
+.nav>a:hover,
+.nav>a:focus {
+  color: black;
+  background-color: #FFD050;
+}
+
+
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #ffffff;
+    background-color: #333;
+}
