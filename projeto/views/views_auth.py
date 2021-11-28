@@ -60,3 +60,6 @@ def cadastro_usuario(request):
 
 def redirect_login(request):
     return render(request, 'index.html')
+
+def userCreatedView(request):
+    return render(request, 'registration/user_created.html')
