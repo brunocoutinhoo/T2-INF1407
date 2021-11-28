@@ -39,3 +39,12 @@
     margin-right: -100%;
     border-top: 3px solid black;
   }
+
+  #feira-logo {
+    display: none;
+    transform: translateY(30%);
+  }
+    
+  @media screen and (min-width: 800px) { 
+    #feira-logo { display: block; } 
+  }
