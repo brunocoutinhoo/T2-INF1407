@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
-from ..models import Barraca, Feira, Usuario
+from ..models import Barraca, Feira, Usuario, Produto
 from projeto.forms.forms_barraca import BarracaForm
 
 
@@ -94,9 +94,11 @@ def deletar_barraca(request, barraca_id):
 def visualizar_barraca(request, barraca_id):
 
     barraca = get_object_or_404(Barraca, barraca_id=barraca_id)
+    produtos = Produto.objects.filter(barraca=barraca_id)
 
     context = {
         'barraca': barraca,
+        'produtos': produtos,
     }
 
     return render(request, "barracas/visualizar_barraca.html", context)
