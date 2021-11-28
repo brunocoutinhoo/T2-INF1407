@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from ..models import Barraca, Feira
@@ -21,7 +21,7 @@ def lista_barracas(request, feira_id):
 
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser)
+@permission_required('project.add_barraca')
 def criar_barraca(request, feira_id):
 
     feira_atual = Feira.objects.filter(feira_id = feira_id).first()
@@ -59,7 +59,7 @@ def criar_barraca(request, feira_id):
 
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser)
+@permission_required('projeto.change_barraca')
 def editar_barraca(request, barraca_id):
     
     barraca = get_object_or_404(Barraca, barraca_id=barraca_id)
@@ -82,7 +82,7 @@ def editar_barraca(request, barraca_id):
     return render(request, 'barracas/editar_barraca.html', context)
 
 @login_required
-@user_passes_test(lambda u: u.is_superuser)
+@permission_required('projeto.delete_barraca')
 def deletar_barraca(request, barraca_id):
 
     barraca = get_object_or_404(Barraca, barraca_id=barraca_id)
@@ -91,8 +91,7 @@ def deletar_barraca(request, barraca_id):
 
     return redirect(reverse('lista_barracas'))
 
-@login_required
-@user_passes_test(lambda u: u.is_superuser)
+
 def visualizar_barraca(request, barraca_id):
 
     barraca = get_object_or_404(Barraca, barraca_id=barraca_id)
