@@ -59,6 +59,10 @@
       <div class="row">
         <div class="col-lg-2 flex-shrink-0 p-5 sidebar bg-light sb-full-height">
           <nav class="nav flex-column nav-pills nav-fill">
+            {% with request.get_full_path as path %}
+              <a class="nav-link {% if path == '/projeto/'%}active{% endif %}" 
+              href="{% url 'index' %}">Home</a>
+            {% endwith %}
             {% with request.get_full_path|slice:":14" as path %}
               <a class="nav-link {% if path == '/projeto/feira'%}active{% endif %}" 
               href="{% url 'lista_feiras' %}">Feiras</a>
