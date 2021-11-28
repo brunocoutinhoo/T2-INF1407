@@ -20,7 +20,7 @@
   <div class="wrapper">
     <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light" style="border-bottom: 1px solid #dee2e6">
       <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'index' %}"><b>Hora da Feira</b></a>
+        <img src="{% static 'img/logo_feira.png' %}" height="40"/>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -49,8 +49,8 @@
               </li>
             </ul>
           {% else %}
-            <a href="{% url 'index' %}" class="btn btn-outline-primary tc-btn-hover" style="margin-left:auto;">Cadastro</a>&nbsp;
-            <a href="{% url 'index' %}" class="btn btn-outline-primary tc-btn-hover">Login</a>
+            <a href="{% url 'cadastro_usuario' %}" class="btn btn-outline-primary tc-btn-hover" style="margin-left:auto;">Cadastro</a>&nbsp;
+            <a href="{% url 'login' %}" class="btn btn-outline-primary tc-btn-hover">Login</a>
           {% endif %}
         </div>
       </div>
@@ -70,7 +70,7 @@
             {% if user.is_authenticated %}
               {% with request.get_full_path|slice:":25" as path %}
                 <a class="nav-link {% if path == '/projeto/lista_de_compras'%}active{% endif %}" 
-                href="{% url 'lista_feiras' %}">Minhas Listas</a>
+                href="{% url 'lista_feiras' %}">Minha Lista</a>
                 {% endwith %}
                 {% if perms.projeto.change_barraca %}
                   <a class="nav-link" href="{% url 'lista_feiras' %}">Minha Barraca</a>
