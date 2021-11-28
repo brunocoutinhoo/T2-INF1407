@@ -8,6 +8,21 @@
   <ul>
     <li>Afinal de contas, por que não???</li>
     <li><strong>Hmmmm Django hmmmmmmm</strong></li>
-    <li>Feira :P</li>
+    <li>Feira :P</li>        
+    <a href="{% url 'cadastro_usuario' %}" class="btn btn-primary btn-lg">
+      Cadastrar </button>
+    </a>
+    {% if not user.is_authenticated %}
+      <a href="{% url 'login' %}" class="btn btn-primary btn-lg">
+        Login </button>
+      </a>
+    {% else %}
+      <a href="{% url 'logout' %}" class="btn btn-primary btn-lg">
+        Logout </button>
+      </a>
+    {% endif %}
+    <a href="{% url 'trocar_senha' %}" class="btn btn-primary btn-lg">
+      Trocar Senha </button>
+    </a>
   </ul>
 {% endblock %}
