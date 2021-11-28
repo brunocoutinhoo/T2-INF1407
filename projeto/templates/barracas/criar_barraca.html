@@ -1,5 +1,4 @@
 {% extends "base_generic.html" %}
-{% load project_tags %}
 {% block title %}Barraca{% endblock %}
 {% block content %}
 <div class="content-section">
@@ -8,36 +7,34 @@
     </div>
     <br>
     <div class="container">
-    	<form id='form-instituicoes' class="form form-horizontal" method="post" role="form" enctype="multipart/form-data" action=" {% url 'adicionar_barraca' %} ">
+    	<form id='form-criar_barraca' class="form form-horizontal" method="post" role="form" enctype="multipart/form-data" action=" {% url 'criar_barraca' feira_id %} ">
             {% csrf_token %}
-            <h3 class="sub"> Barraca
-                <i class="fas fa-info-circle" data-toggle='tooltip' title='Informações da instituição/empresa/entidade'></i>
-            </h3>
             <div class="row">
                 	<div class="col-md-6">
                         <p style="margin-bottom: .5rem">Nome da Barraca<span style="color:red">* </span></p>
                         {{ form.nome_barraca }}
                     </div>
             </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p style="margin-bottom: .5rem">Descrição</p>
+                    {{ form.descricao }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p style="margin-bottom: .5rem">Número da Barraca</p>
+                    {{ form.numero_barraca }}
+                </div>
+            </div>
             <br>
             <h3 class="sub">Dados de Contato</h3>
             <div class='row'>
                 <div class="col-md-12">
                     <div class="col-md-6">
-                        <p style="margin-bottom: .5rem">Nome do Responsável<span style="color:red">* </span></p>
-                            {{ form.nome_responsavel }}
+                        <p style="margin-bottom: .5rem">Telefone do Responsável<span style="color:red">* </span></p>
+                            {{ form.telefone_responsavel }}
                     </div>
-                	<div class="col-md-3">
-                        <div class="form-group">
-                            <label class='control-label'>Telefone de Contato</label>
-                            <input class='form-control' type="text" name="telefone" id='telefone'>
-                            {% if form.telefone.errors %}
-                                <div class = "alert alert-danger" role = "alert">
-                                    {{ form.telefone.errors }}
-                                </div>
-                            {% endif %}
-                        </div>
-                	</div>
                 </div>
             </div>
             <hr>
@@ -49,7 +46,7 @@
         </form>
         <div class="row justify-content-end">
             <div class="form-group col-md-2">
-              <a href="{%url 'lista_barracas'%}"><button class="btn btn-secondary btn-block btn-lg"><i class="fa fa-undo-alt"> </i> Voltar</button></a>
+              <a href="{%url 'lista_barracas' feira_id %}"><button class="btn btn-secondary btn-block btn-lg"><i class="fa fa-undo-alt"> </i> Voltar</button></a>
             </div>
         </div>
      </div>

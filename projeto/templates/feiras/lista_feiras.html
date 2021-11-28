@@ -37,7 +37,7 @@
             {% for feira in feiras %}
             <tr>
                 <td>
-                    <a href="#" data-tt="tooltip" title="Ver barracas da Feira.">
+                    <a href="{% url 'lista_barracas' feira.feira_id %}" data-tt="tooltip" title="Ver barracas da Feira.">
                     {{ feira.nome_feira }}
                     </a>
                 </td>

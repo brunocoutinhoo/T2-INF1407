@@ -17,11 +17,24 @@
     
         <hr class="intro-divider">
         <br/>
+        <div class="row">
+          <div class="col-md-6">
+            <a href="{% url 'criar_barraca' feira_id %}" class="btn btn-primary btn-lg">
+              <i class="fa fa-plus"></i> Nova Barraca </button>
+            </a>
+          </div>
+        </div>
             {% if barracas %}
         <table class="table table-striped table-bordered" id="tabela_barracas">
             <thead>
                 <tr>
                     <th width="50%"> Nome </th>
+                </tr>
+                <tr>
+                  <th width="25%"> Responsável </th>
+                </tr>
+                <tr>
+                  <th width="25%"> Telefone </th>
                 </tr>
             </thead>
             <tbody>
@@ -32,6 +45,12 @@
                     {{ barraca.nome }} 
                     </a>
                 </td>
+                <td>
+                    {{ barraca.nome_responsavel }} 
+                </td>
+                <td>
+                    {{ barraca.telefone_responsavel }} 
+                </td>
             </tr>
             {% endfor %}
             </tbody>
@@ -39,7 +58,7 @@
             {% else %}
         <div style="text-align: center">
             <div style="text-align: center">
-                <h3> Ainda não há nenhuma barraca cadastrada. </h3>
+                <h3> Ainda não há nenhuma barraca cadastrada nesta Feira. </h3>
             {% endif %}
             </div>
         </div> 
