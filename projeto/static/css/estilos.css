@@ -4,6 +4,33 @@
     list-style: none;
 }
 
+#sidebar {
+  width: 180px;
+  position: fixed;
+  top: 56px;
+  left: 0;
+  height: 100vh;
+  z-index: 999;
+  transition: all 0.3s;
+}
+
+.sb-full-height {
+  min-height: 100vh;
+}
+
+#sidebar.active {
+  margin-left: -265px;
+}
+.wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.login {
+  margin-left: 85%;
+}
+
 .resumo-feiras {
     overflow: hidden;
   }
