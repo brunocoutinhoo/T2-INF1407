@@ -32,7 +32,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 if ENVIRONMENT == 'production':
-    ALLOWED_HOSTS = ['https://horadafeira.herokuapp.com/']
+    ALLOWED_HOSTS = ['horadafeira.herokuapp.com']
 
 # Application definition
 
