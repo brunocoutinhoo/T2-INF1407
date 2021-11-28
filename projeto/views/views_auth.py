@@ -11,12 +11,12 @@ from projeto.forms.forms_auth import CadastrarUsuarioForm
 from projeto.models import Usuario
 
 
-grupo_feirante = Group.objects.get(name='Feirante')
-grupo_cliente = Group.objects.get(name='Cliente')
-
 def cadastro_usuario(request):
     # if request.user.is_authenticated:
     #     return HttpResponseRedirect(reverse('index'))
+
+    grupo_feirante = Group.objects.get(name='Feirante')
+    grupo_cliente = Group.objects.get(name='Cliente')
 
     if request.method == 'POST':
         form = CadastrarUsuarioForm(request.POST)
