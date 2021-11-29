@@ -34,7 +34,9 @@
                     <th width="30%"> Nome </th>
                     <th width="20%"> Local </th>
                     <th width="20%"> Data </th>
+                    {% if request.user.is_superuser %}
                     <th width="20%"> Ações </th>
+                    {% endif %}
                 </tr>
             </thead>
             <tbody>
@@ -53,24 +55,22 @@
                     {{ feira.dia_semana }}
                     </a>
                 </td>
-                <td>
-                  <div class="row justify-content-between">
-                    <div class="col-6 text-center">
-                      {% if request.user.is_superuser %}
-                      <a href="{% url 'editar_feira' feira.feira_id %}" data-tt="tooltip" title="Editar propriedades da feira.">
-                        <i class="far fa-edit fa-2x"></i>
-                      </a>
-                      {% endif %}
+                {% if request.user.is_superuser %}
+                  <td>
+                    <div class="row justify-content-between">
+                      <div class="col-6 text-center">
+                        <a href="{% url 'editar_feira' feira.feira_id %}" data-tt="tooltip" title="Editar propriedades da feira.">
+                          <i class="far fa-edit fa-2x"></i>
+                        </a>
+                      </div>
+                      <div class="col-6 text-center">
+                        <a href="" data-href="{% url 'deletar_feira'  feira.feira_id %}" data-toggle="modal" data-target="#modal_deletar_feira" data-tt="tooltip" title="Realizar exclusão da feira.">
+                          <i class="fa fa-trash fa-2x"></i>
+                        </a>
+                      </div>
                     </div>
-                    <div class="col-6 text-center">
-                      {% if request.user.is_superuser %}
-                      <a href="" data-href="{% url 'deletar_feira'  feira.feira_id %}" data-toggle="modal" data-target="#modal_deletar_feira" data-tt="tooltip" title="Realizar exclusão da feira.">
-                        <i class="fa fa-trash fa-2x"></i>
-                      </a>
-                      {% endif %}
-                    </div>
-                  </div>
-                </td>
+                  </td>
+                {% endif %}
             </tr>
             {% endfor %}
             </tbody>
