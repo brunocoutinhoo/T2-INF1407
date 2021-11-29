@@ -48,10 +48,8 @@ class Produto(models.Model):
 
 class ListaCompras(models.Model):
     lista_id = models.AutoField(primary_key=True)
-    responsavel = models.ForeignKey('Usuario',on_delete=models.CASCADE, db_column='fk_responsavel_id', related_name='lista_responsavel_fk')
+    cliente = models.ForeignKey('Usuario',on_delete=models.CASCADE, db_column='fk_responsavel_id', related_name='lista_responsavel_fk')
+    produto = models.ForeignKey('Produto', on_delete=models.CASCADE, db_column='fk_produto_id', related_name='lista_produto_fk')
 
-
-class ProdutoListaCompras(models.Model):
-    produtolista_id = models.AutoField(primary_key=True)
-    produto = models.ForeignKey('Produto', on_delete=models.CASCADE, db_column='fk_produto_id', related_name='produtolista_produto_fk')
-    lista_compras = models.ForeignKey('ListaCompras', on_delete=models.CASCADE, db_column='fk_lista_id', related_name='produtolista_lista_fk')
+    class Meta:
+        unique_together = ('cliente', 'produto')
