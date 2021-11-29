@@ -21,7 +21,7 @@ def cadastro_usuario(request):
     grupo_cliente = Group.objects.get(name='Cliente')
 
     if request.method == 'POST':
-        form = CadastrarUsuarioForm(request.POST)
+        form = CadastrarUsuarioForm(request.POST, auto_id=True)
 
         if form.is_valid():
             user = Usuario.objects.create_user(

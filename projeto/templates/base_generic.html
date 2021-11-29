@@ -74,24 +74,19 @@
               <a class="nav-link {% if path == '/projeto/feira'%}active{% endif %}"
               href="{% url 'lista_feiras' %}">Feiras</a>
             {% endwith %}
-            {% with request.get_full_path|slice:":16" as path %}
-              <a class="nav-link {% if path == '/projeto/produto'%}active{% endif %}" 
-              href="{% url 'lista_feiras' %}">Produtos</a>
-            {% endwith %}
             {% if user.is_authenticated %}
               {% with request.get_full_path|slice:":25" as path %}
                 <a class="nav-link {% if path == '/projeto/lista_de_compras'%}active{% endif %}" 
                 href="{% url 'visualizar_lista_compras' %}">Minha Lista</a>
                 {% endwith %}
                 {% if perms.projeto.change_barraca %}
-                  <a class="nav-link" href="{% url 'minhas_barracas' user.id %}">Minhas Barracas</a>
+                  {% with request.get_full_path|slice:":23" as path %}
+                    <a class="nav-link {% if path == '/projeto/minhasbarracas'%}active{% endif %}" 
+                    href="{% url 'minhas_barracas' user.id %}">Minhas Barracas</a>
+                  {% endwith %}
                 {% endif %}
             {% endif %}
             <hr />
-            {% with request.get_full_path|slice:":14" as path %}
-              <a class="nav-link {% if path == '/projeto/sobre'%}active{% endif %}" 
-              href="{% url 'lista_feiras' %}">Sobre</a>
-            {% endwith %}
           </nav>
         </div>
         <div class="p-5 col-lg-8">

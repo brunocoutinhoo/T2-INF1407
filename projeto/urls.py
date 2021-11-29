@@ -4,7 +4,7 @@ from projeto.views.views_barraca import lista_barracas, criar_barraca, editar_ba
 from projeto.views.views_produto import adicionar_produto, editar_produto, deletar_produto
 from projeto.views.views_lista import adicionar_produto_lista, remover_produto_lista, visualizar_lista_compras
 from projeto.views.views_auth import cadastro_usuario
-from projeto.views.views_home import index
+from projeto.views.views_home import index, sobre
 
 urlpatterns = [
     path('', index, name='index'),
@@ -25,4 +25,5 @@ urlpatterns = [
     path('lista/adicionar/<int:produto_id>', adicionar_produto_lista, name='adicionar_produto_lista'),
     path('lista/remover/<int:produto_id>', remover_produto_lista, name='remover_produto_lista'),
     path('lista/visualizar', visualizar_lista_compras, name='visualizar_lista_compras'),
+    path('sobre/sobre/', sobre, name='sobre'),
 ]
