@@ -49,6 +49,9 @@
                 <th width="30%"> Descrição </th>
                 <th width="20%"> Preço Unitário(R$) </th>
                 <th width="20%"> Unidade </th>
+                {% if request.user.is_authenticated %}
+                  <th width="10%"> Ações </th>
+                {% endif %}
               </tr>
           </thead>
           <tbody>
@@ -72,6 +75,13 @@
               </td>
               <td>
                 <div class="row justify-content-between">
+                  <div class="col-6 text-center">
+                    {% if request.user.is_authenticated %}
+                    <a href="{% url 'adicionar_produto_lista' produto.produto_id %}" data-tt="tooltip" title="Adicionar à minha lista">
+                      <i class="fa fa-plus fa-2x"></i>
+                    </a>
+                    {% endif %}
+                  </div>
                   <div class="col-6 text-center">
                     {% if request.user == barraca.responsavel %}
                     <a href="{% url 'editar_produto' produto.produto_id %}" data-tt="tooltip" title="Editar propriedades do produto">

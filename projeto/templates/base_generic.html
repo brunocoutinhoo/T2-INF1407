@@ -81,7 +81,7 @@
             {% if user.is_authenticated %}
               {% with request.get_full_path|slice:":25" as path %}
                 <a class="nav-link {% if path == '/projeto/lista_de_compras'%}active{% endif %}" 
-                href="{% url 'lista_feiras' %}">Minha Lista</a>
+                href="{% url 'visualizar_lista_compras' %}">Minha Lista</a>
                 {% endwith %}
                 {% if perms.projeto.change_barraca %}
                   <a class="nav-link" href="{% url 'minhas_barracas' user.id %}">Minhas Barracas</a>
