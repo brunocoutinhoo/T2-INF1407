@@ -84,7 +84,10 @@
                 href="{% url 'lista_feiras' %}">Minha Lista</a>
                 {% endwith %}
                 {% if perms.projeto.change_barraca %}
-                  <a class="nav-link" href="{% url 'minhas_barracas' user.id %}">Minhas Barracas</a>
+                  {% with request.get_full_path|slice:":23" as path %}
+                    <a class="nav-link {% if path == '/projeto/minhasbarracas'%}active{% endif %}" 
+                    href="{% url 'minhas_barracas' user.id %}">Minhas Barracas</a>
+                  {% endwith %}
                 {% endif %}
             {% endif %}
             <hr />

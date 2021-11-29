@@ -1,5 +1,5 @@
 {% extends "base_generic.html" %}
-
+{% load static %}
 {% block content %}
 {% include "messages.html" %}
 
@@ -17,11 +17,11 @@
 			</legend>
 
 			<p class="lead text-center">
-                Bem-vindo(a) ao Feira!<br>
+                Bem-vindo(a) ao Hora da Feira!<br>
             </p>
+            <script type="text/javascript" src="{% static 'js/validacao.js' %}"></script>
 
 			<hr class="my-4">
-
 			<form method="post" action="{% url 'cadastro_usuario' %}">
 				{% csrf_token %}
                 <div class="row justify-content-center">
@@ -38,26 +38,24 @@
 				<div class="row justify-content-center">
 					<div class="form-group col-md-8">
                         <h3 class="sub"> Dados da Conta </h3>
-						{{ form.usuario.label_tag }}
+						{{ form.usuario.label_tag }} <span id='idMensagemUsuario' class='texto-validacao'></span>
                         {{ form.usuario }}
                         {% if form.usuario.errors %}
                         <div class="alert alert-danger" role="alert">
                             {{ form.usuario.errors }}
                         </div>
                         {% endif %}
+                        <br>
 
-                        {{ form.email.label_tag }}
+                        {{ form.email.label_tag }} <span id='idMensagemEmail' class='texto-validacao'></span>
                         {{ form.email }}
                         {% if form.email.errors %}
                         <div class="alert alert-danger" role="alert">
                             {{ form.email.errors }}
                         </div>
                         {% endif %}
-					</div>
-                </div>
-
-                <div class="row justify-content-center">
-					<div class="form-group col-md-8">
+                        <br>
+                    
 						{{ form.senha.label_tag }}
                         {{ form.senha }}
                         {% if form.senha.errors %}
@@ -99,7 +97,8 @@
 
                 <div class="row justify-content-center">
 					<div class="form-group col-md-8">
-                        {{ form.cpf.label_tag }}
+                        
+                        {{ form.cpf.label_tag }} <span id='idMensagemCPF' class='texto-validacao'></span>
                         {{ form.cpf }}
                         {% if form.cpf.errors %}
                         <div class="alert alert-danger" role="alert">

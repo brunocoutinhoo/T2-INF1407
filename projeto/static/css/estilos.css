@@ -61,9 +61,7 @@
   background-color: #FFD050;
 }
 
-
-.navbar-custom .nav-item.active .nav-link,
-.navbar-custom .nav-item:hover .nav-link {
-    color: #ffffff;
-    background-color: #333;
+.texto-validacao {
+  text-align: end;
+  color:	blue;
 }

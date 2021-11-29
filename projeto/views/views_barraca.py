@@ -21,14 +21,14 @@ def lista_barracas(request, feira_id):
 
 
 @login_required
-@permission_required('project.add_barraca')
+@permission_required('projeto.add_barraca')
 def criar_barraca(request, feira_id):
 
     feira_atual = Feira.objects.filter(feira_id = feira_id).first()
     current_user = request.user
 
     if request.method == 'POST':
-        form = BarracaForm(request.POST)
+        form = BarracaForm(request.POST, auto_id=True)
         if form.is_valid():
             barraca = Barraca(
                 feira = feira_atual,
