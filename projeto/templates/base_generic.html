@@ -87,10 +87,6 @@
                 {% endif %}
             {% endif %}
             <hr />
-            {% with request.get_full_path|slice:":14" as path %}
-              <a class="nav-link {% if path == '/projeto/sobre'%}active{% endif %}" 
-              href="{% url 'lista_feiras' %}">Sobre</a>
-            {% endwith %}
           </nav>
         </div>
         <div class="p-5 col-lg-8">
