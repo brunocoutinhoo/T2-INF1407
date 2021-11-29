@@ -11,30 +11,20 @@
 <!-- Barracas -->
         <div class="row align-items-center">
             <div class="col-md-12">
-                <h1> Barracas da Feira {{ feira_atual.nome_feira }}: </h1>
+                <h1> Barracas de {{ responsavel_barracas.first_name }} {{ responsavel_barracas.last_name }}: </h1>
             </div>
         </div>
     
         <hr class="intro-divider">
         <br/>
-        <div class="row">
-          <div class="col-md-6">
-            {% if perms.projeto.change_barraca %}
-              <a href="{% url 'criar_barraca' feira_id %}" class="btn btn-primary btn-lg">
-                <i class="fa fa-plus"></i> Nova Barraca </button>
-              </a>
-            {% endif %}
-
-          </div>
-        </div>
           <br>
             {% if barracas %}
         <table class="table table-striped table-bordered" id="tabela_barracas">
             <thead>
                 <tr>
                   <th width="33%"> Nome </th>
-                  <th width="33%"> Responsável </th>
-                  <th width="33%"> Telefone </th>
+                  <th width="33%"> Feira </th>
+                  <th width="33%"> Local </th>
                 </tr>
             </thead>
             <tbody>
@@ -46,14 +36,10 @@
                     </a>
                 </td>
                 <td>
-                  {% if barraca.responsavel.first_name %}
-                    {{ barraca.responsavel.first_name }} {{ barraca.responsavel.last_name }}
-                  {% else %}
-                    Não Possui
-                  {% endif %}
+                    {{ barraca.feira.nome_feira }}
                 </td>
                 <td>
-                    {{ barraca.telefone_responsavel }}
+                    {{ barraca.feira.endereco_logradouro }}
                 </td>
             </tr>
             {% endfor %}
@@ -62,7 +48,7 @@
             {% else %}
         <div style="text-align: center">
             <div style="text-align: center">
-                <h3> Ainda não há nenhuma barraca cadastrada nesta Feira. </h3>
+                <h3> Você não possui nenhuma barraca cadastrada. </h3>
             {% endif %}
             </div>
         </div> 

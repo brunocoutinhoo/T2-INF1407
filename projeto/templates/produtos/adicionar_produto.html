@@ -3,11 +3,11 @@
 {% block content %}
 <div class="content-section">
     <div class="center text-center">
-    	<h1>Editar produto:</h1>
+    	<h1>Adicionar produto:</h1>
     </div>
     <br>
     <div class="container">
-    	<form id='form-editar_produto' class="form form-horizontal" method="post" role="form" enctype="multipart/form-data" action=" {% url 'editar_produto' produto_id %} ">
+    	<form id='form-adicionar_produto' class="form form-horizontal" method="post" role="form" enctype="multipart/form-data" action=" {% url 'adicionar_produto' barraca_id %} ">
             {% csrf_token %}
             <div class="row">
                 	<div class="col-md-6">
@@ -52,7 +52,7 @@
 <script>
     $( function() {
       $( "#id_nome" ).autocomplete({
-        source: "{% url 'editar_produto' produto_id %}"
+        source: "{% url 'adicionar_produto' barraca_id %}"
       });
     } );
     </script>

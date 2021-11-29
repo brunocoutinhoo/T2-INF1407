@@ -15,7 +15,6 @@
         <p> <b>Responsável pela Barraca:</b> {% if barraca.responsavel.first_name %} {{ barraca.responsavel.first_name }} {{ barraca.responsavel.last_name }} {% else %} Sem informações {% endif %}</p>
       </div>
       <div class="col-md-12">
-        <h3 class="sub"> Descricao </h3>
         <p> <b>Descrição:</b> {% if barraca.descricao %} {{ barraca.descricao }} {% else %} Sem informações {% endif %}</p>
       </div>
       <div class="col-md-12">
@@ -25,10 +24,164 @@
           <p> <b>Número da Barraca: </b> {% if barraca.numero %} {{ barraca.numero}} {% else %} Sem informações {% endif %}</p>
       </div>
     </div>
-    <div>
-      <a href="{%url 'lista_barracas' barraca.feira.feira_id %}"><button type="button" class="btn btn-primary btn-lg">Voltar</button></a>
+    {% if request.user == barraca.responsavel %}
+    <div class="row">
+      <div class="col-md-6">
+        <a href="{% url 'editar_barraca' barraca.barraca_id %}" class="btn btn-primary btn-lg">
+          <i class="fa fa-plus"></i> Editar Barraca </button>
+        </a>
+      </div>
     </div>
+    {% endif %}
+      <hr class="intro-divider">
+      <div class="row">
+        <div class="col-md-12">
+            <h3> Produtos da Barraca {{ barraca.nome_barraca }}: </h3>
+        </div>
+      </div>
+      <br/>
+      {% if request.user == barraca.responsavel %}
+      <div class="row">
+        <div class="col-md-6">
+          <a href="{% url 'adicionar_produto' barraca.barraca_id %}" class="btn btn-primary btn-lg">
+            <i class="fa fa-plus"></i> Adicionar Produto </button>
+          </a>
+        </div>
+      </div>
+      {% endif %}
+      <br>
+      {% if produtos %}
+      <table class="table table-striped table-bordered" id="tabela_produtos">
+          <thead>
+              <tr>
+                <th width="20%"> Nome </th>
+                <th width="30%"> Descrição </th>
+                <th width="20%"> Preço Unitário(R$) </th>
+                <th width="20%"> Unidade </th>
+                {% if request.user.is_authenticated %}
+                  <th width="10%"> Ações </th>
+                {% endif %}
+              </tr>
+          </thead>
+          <tbody>
+          {% for produto in produtos %}
+          <tr>
+              <td>
+                {{ produto.nome }}
+              </td>
+              <td>
+                {% if produto.descricao %}
+                  {{ produto.descricao }}
+                {% else %}
+                  Não Possui
+                {% endif %}
+              </td>
+              <td>
+                  {{ produto.preco_unitario }}
+              </td>
+              <td>
+                {{ produto.unidade }}
+              </td>
+              <td>
+                <div class="row justify-content-between">
+                  <div class="col-6 text-center">
+                    {% if request.user.is_authenticated %}
+                    <a href="{% url 'adicionar_produto_lista' produto.produto_id %}" data-tt="tooltip" title="Adicionar à minha lista">
+                      <i class="fa fa-plus fa-2x"></i>
+                    </a>
+                    {% endif %}
+                  </div>
+                  <div class="col-6 text-center">
+                    {% if request.user == barraca.responsavel %}
+                    <a href="{% url 'editar_produto' produto.produto_id %}" data-tt="tooltip" title="Editar propriedades do produto">
+                      <i class="far fa-edit fa-2x"></i>
+                    </a>
+                    {% endif %}
+                  </div>
+                  <div class="col-6 text-center">
+                    {% if request.user == barraca.responsavel %}
+                    <a href="" data-href="{% url 'deletar_produto' produto.produto_id %}" data-toggle="modal" data-target="#modal_deletar_produto" data-tt="tooltip" title="Apagar produto">
+                      <i class="fa fa-trash fa-2x"></i>
+                    </a>
+                    {% endif %}
+                  </div>
+                </div>
+              </td>
+          </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <div style="text-align: center">
+            <div style="text-align: center">
+              <br>
+              <br>
+                <h3> Ainda não há nenhum produto cadastrado nesta barraca. </h3>
+            </div>
+        </div>
+        {% endif %}
+        <div id="modal_deletar_produto" class="modal fade" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Tem certeza que deseja deletar este produto?</h4>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Cancelar</button>
+                <a type="button" class="btn btn-danger btn-lg btn-ok">Sim</a>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <br>
+        <br>
+        <div>
+          <a href="{% url 'lista_barracas' barraca.feira.feira_id %}"><button type="button" class="btn btn-primary btn-lg">Voltar</button></a>
+        </div>
   </div>
 </div>
+
+<script>
+
+  $('#modal_deletar_produto').on('show.bs.modal', function(e) {
+      $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+  });
+  
+  $(document).ready(function() {
+    $.fn.dataTable.moment('DD/MM/YYYY');
+      $('#tabela_feiras').DataTable({
+  
+      // configurações das mensagens da tabela
+      "language": { 
+        "lengthMenu": "Mostrar _MENU_ feiras por página",
+        "zeroRecords": "Nada com esse filtro - desculpe",
+        "info": "Mostrando _PAGE_ de _PAGES_",
+        "infoEmpty": "Não há feiras com esse filtro",
+        "infoFiltered": "(filtrado de um total de _MAX_ feiras)",
+        "paginate": {
+          "first": "Primeiro",
+          "last": "Último",
+          "next": "Próximo",
+          "previous": "Anterior",
+        },
+        "loadingRecords": "Carregando...",
+        "search": "Filtrar:",
+        "aria": {
+          "sortAscending": ": Ative para ordenar a coluna de forma ascendente",
+          "sortDescending": ": Ative para odenar a coluna de forma descendente"
+        }
+      },
+  
+      // ordenação padrão: role
+      "order": [[ 1, "asc" ]],
+  
+      "responsive": true
+    });
+  });
+  
+  $('[data-tt="tooltip"]').tooltip();
+  
+  </script>
 
 {% endblock %}

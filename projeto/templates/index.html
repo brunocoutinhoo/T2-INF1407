@@ -9,20 +9,20 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="row display-flex">
-					<div class="col-sm-6">
+					<div class="col-sm-12">
 						<div class="intro-message">
-              <div class="col-sm-6 text-center" id="feira-logo">
+              				<div class="col-sm-6 text-center" id="feira-logo">
 								<img class="img-responsive center-block" src="{% static 'img/logo_feira.png' %}" alt="logo" width="937" height="233">
-						  </div>
-              <br>
-              <br>
-							<h3 >Ao efetuar o cadastro, seu dependente concorre a uma vaga em um dos cursos de férias disponíveis.</h3>
+						  	</div>
 							<br>
-							{% if current_user.is_authenticated == false %}
-								<a href="{% url 'cadastro_usuario' %}" class="btn btn-success btn-lg" >Iniciar cadastro</a>
-								<a style="margin-left: 5%;" href="{% url 'login' %}" class="btn btn-primary btn-lg" >Entrar</a>
-							{% endif %}
-
+							<br>
+							<div class="col-lg-12">
+								<br>
+								<h4 style="color:#ae78b8;">Seu site favorito para ficar sempre ligado nas melhores feiras da sua cidade! Garantimos que você sempre encontrará os produtos
+									mais frescos de melhor qualidade e melhor ainda, que cabem no seu bolso!</h4>
+						  	</div>
+							<br>
+							<br>
 						</div>
 					</div>
 					</div>
