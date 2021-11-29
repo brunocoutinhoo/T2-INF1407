@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
-from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from ..models import Barraca, Feira, Usuario, Produto
@@ -70,13 +70,14 @@ def editar_barraca(request, barraca_id):
             barraca.save()
             messages.add_message(request, messages.INFO, _('barraca editada com sucesso!\n'))
 
-            return redirect(reverse('lista_barracas'))
+            return redirect(reverse('lista_barracas',args=[barraca.feira.feira_id]))
 
     form = BarracaForm(instance=barraca)
 
     context = {
         'form': form,
-        'barraca_id': barraca_id
+        'barraca_id': barraca_id,
+        'feira_id': barraca.feira.feira_id
     }
     return render(request, 'barracas/editar_barraca.html', context)
 

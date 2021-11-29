@@ -74,10 +74,6 @@
               <a class="nav-link {% if path == '/projeto/feira'%}active{% endif %}"
               href="{% url 'lista_feiras' %}">Feiras</a>
             {% endwith %}
-            {% with request.get_full_path|slice:":16" as path %}
-              <a class="nav-link {% if path == '/projeto/produto'%}active{% endif %}" 
-              href="{% url 'lista_feiras' %}">Produtos</a>
-            {% endwith %}
             {% if user.is_authenticated %}
               {% with request.get_full_path|slice:":25" as path %}
                 <a class="nav-link {% if path == '/projeto/lista_de_compras'%}active{% endif %}" 
