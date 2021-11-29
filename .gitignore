@@ -1,1 +1,7 @@
 __pycache__/*
+*.pyc
+projeto/__pycache__/urls.cpython-38.pyc
+projeto/__pycache__/models.cpython-38.pyc
+projeto/__pycache__/admin.cpython-38.pyc
+feira_livre/__pycache__/urls.cpython-38.pyc
+feira_livre/__pycache__/settings.cpython-38.pyc
